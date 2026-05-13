@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <string.h>
 
 using namespace std;
 
@@ -13,31 +14,42 @@ struct datiUtente {
 };
 
 void AggiungiUtente() {
+    ofstream fTrimestre("TRIMESTRE.BIN", ios::binary);
     datiUtente utente;
+
     cout << "Inserisci il nome e il cognome dell'utente" << endl;
     cin.ignore();
     cin.getline(utente.nome, 50);
+    fTrimestre.write((char*)&utente, sizeof(datiUtente));
 
     do {
         cout << "Inserisci il codice fiscale dell'utente" << endl;
         cin >> utente.codiceFiscale;
-        if (sizeof(utente.codiceFiscale) != 16) {
+        if (strlen(utente.codiceFiscale) != 2) {
             cout << "non e' stato inserito un valore valido" << endl;
         }
-    }while(sizeof(utente.codiceFiscale) != 16);
+    }while(strlen(utente.codiceFiscale) != 2);
+    fTrimestre.write((char*)&utente, sizeof(datiUtente));
 
     cout << "Inserisci l'indirizzo dell'utente" << endl;
+    cin.ignore();
     cin.getline(utente.indirizzo, 50);
+    fTrimestre.write((char*)&utente, sizeof(datiUtente));
+
 
     cout << "Inserire la lettura del contatore alla fine del trimestre attuale (metri cubi)" << endl;
     cin >> utente.TrimestreAttuale;
+    fTrimestre.write((char*)&utente, sizeof(datiUtente));
 
     cout << "Inserire la lettura del contatore alla fine del trimestre precedente (metri cubi)" << endl;
     cin >> utente.TrimestrePrecedente;
+    fTrimestre.write((char*)&utente, sizeof(datiUtente));
 
     cout << "Inserire l'importo delle bollette precedenti non pagete (0 se non esistono)" << endl;
     cin >> utente.importoNonPagato;
+    fTrimestre.write((char*)&utente, sizeof(datiUtente));
 }
+
 void ModificaUtente() {
 }
 void EliminaUtente() {
@@ -46,7 +58,6 @@ void EliminaUtente() {
 
 int main()
 {
-
     ofstream fTrimestre("TRIMESTRE.BIN", ios::binary);
     if (!fTrimestre.is_open()) {
         perror("Errore di apertura del file.");
