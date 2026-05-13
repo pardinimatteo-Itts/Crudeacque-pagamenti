@@ -15,6 +15,7 @@ struct datiUtente {
 void AggiungiUtente() {
     datiUtente utente;
     cout << "Inserisci il nome e il cognome dell'utente" << endl;
+    cin.ignore();
     cin.getline(utente.nome, 50);
 
     do {
