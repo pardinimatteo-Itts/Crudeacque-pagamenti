@@ -1,9 +1,81 @@
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
+struct datiUtente {
+    char nome[100];
+    char codiceFiscale[15];
+    char indirizzo[50];
+    double TrimestreAttuale;
+    double TrimestrePrecedente;
+    double importoNonPagato;
+};
+
+void AggiungiUtente() {
+    datiUtente utente;
+    cout << "Inserisci il nome e il cognome dell'utente" << endl;
+    cin.getline(utente.nome, 50);
+
+    do {
+        cout << "Inserisci il codice fiscale dell'utente" << endl;
+        cin >> utente.codiceFiscale;
+        if (sizeof(utente.codiceFiscale) != 16) {
+            cout << "non e' stato inserito un valore valido" << endl;
+        }
+    }while(sizeof(utente.codiceFiscale) != 16);
+
+    cout << "Inserisci l'indirizzo dell'utente" << endl;
+    cin.getline(utente.indirizzo, 50);
+
+    cout << "Inserire la lettura del contatore alla fine del trimestre attuale (metri cubi)" << endl;
+    cin >> utente.TrimestreAttuale;
+
+    cout << "Inserire la lettura del contatore alla fine del trimestre precedente (metri cubi)" << endl;
+    cin >> utente.TrimestrePrecedente;
+
+    cout << "Inserire l'importo delle bollette precedenti non pagete (0 se non esistono)" << endl;
+    cin >> utente.importoNonPagato;
+}
+void ModificaUtente() {
+}
+void EliminaUtente() {
+}
+
+
 int main()
 {
-    cout << "Hello world!" << endl;
-    return 0;
+
+    ofstream fTrimestre("TRIMESTRE.BIN", ios::binary);
+    if (!fTrimestre.is_open()) {
+        perror("Errore di apertura del file.");
+    }
+
+    int scelta;
+    cout << "===================MENU===================" << endl;
+    cout << "1. Aggiungi Dati Utente" << endl
+         << "2. Modifica Dati Utente" << endl
+         << "3. Elimina Dati Utente" << endl
+         << "4. Esci" << endl;
+    do {
+        cin >> scelta;
+        if (scelta < 1 || scelta > 4) {
+            cout << "E' stato inserito un valore non valido" << endl;
+        }
+    }while(scelta < 1 || scelta > 4);
+
+    switch (scelta){
+        case 1:
+            AggiungiUtente();
+            break;
+        case 2:
+            ModificaUtente();
+            break;
+        case 3:
+            EliminaUtente();
+            break;
+        case 4:
+            fTrimestre.close();
+            return 0;
+    }
 }
