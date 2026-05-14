@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1778774200 source:c:\users\luca\documents\lg3ib\crudacque\crudeacque-pagamenti\main.cpp
+	<iostream>
+	<fstream>
+	<string.h>
+
