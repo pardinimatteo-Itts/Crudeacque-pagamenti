@@ -36,14 +36,30 @@ void aggiungiUtente() {
     cin.ignore();
     cin.getline(utente.indirizzo, 50);
 
-    cout << "Inserire la lettura del contatore alla fine del trimestre attuale (metri cubi)" << endl;
-    cin >> utente.TrimestreAttuale;
+    do{
+        cout << "Inserire la lettura del contatore alla fine del trimestre attuale (metri cubi)" << endl;
+        cin >> utente.TrimestreAttuale;
+        if(utente.TrimestreAttuale < 0) {
+            cout << "Non e' stato inserito un valore valido" << endl;
+        }
+    }while(utente.TrimestreAttuale < 0);
 
-    cout << "Inserire la lettura del contatore alla fine del trimestre precedente (metri cubi)" << endl;
-    cin >> utente.TrimestrePrecedente;
+    do{
+        cout << "Inserire la lettura del contatore alla fine del trimestre precedente (metri cubi)" << endl;
+        cin >> utente.TrimestrePrecedente;
+        if(utente.TrimestrePrecedente < 0) {
+            cout << "Non e' stato inserito un valore valido" << endl;
+        }
+    }while(utente.TrimestreAttuale < 0);
 
-    cout << "Inserire l'importo delle bollette precedenti non pagete (0 se non esistono)" << endl;
-    cin >> utente.importoNonPagato;
+    do{
+        cout << "Inserire l'importo delle bollette precedenti non pagete (0 se non esistono)" << endl;
+        cin >> utente.importoNonPagato;
+        if(utente.importoNonPagato < 0) {
+            cout << "Non e' stato inserito un valore valido" << endl;
+        }
+    }while(utente.TrimestreAttuale < 0);
+
     fTrimestre.write((char*)&utente, sizeof(datiUtente));
     fTrimestre.close();
 }
@@ -88,14 +104,29 @@ void modificaUtente() {
             cin.ignore();
             cin.getline(utente.indirizzo, 50);
 
-            cout << "Inserire la lettura del contatore alla fine del trimestre attuale (metri cubi)" << endl;
-            cin >> utente.TrimestreAttuale;
+                do{
+                    cout << "Inserire la lettura del contatore alla fine del trimestre attuale (metri cubi)" << endl;
+                    cin >> utente.TrimestreAttuale;
+                    if(utente.TrimestreAttuale < 0) {
+                        cout << "Non e' stato inserito un valore valido" << endl;
+                    }
+                }while(utente.TrimestreAttuale < 0);
 
-            cout << "Inserire la lettura del contatore alla fine del trimestre precedente (metri cubi)" << endl;
-            cin >> utente.TrimestrePrecedente;
+                do{
+                    cout << "Inserire la lettura del contatore alla fine del trimestre precedente (metri cubi)" << endl;
+                    cin >> utente.TrimestrePrecedente;
+                    if(utente.TrimestrePrecedente < 0) {
+                        cout << "Non e' stato inserito un valore valido" << endl;
+                    }
+                }while(utente.TrimestreAttuale < 0);
 
-            cout << "Inserire l'importo delle bollette precedenti non pagete (0 se non esistono)" << endl;
-            cin >> utente.importoNonPagato;
+                do{
+                    cout << "Inserire l'importo delle bollette precedenti non pagete (0 se non esistono)" << endl;
+                    cin >> utente.importoNonPagato;
+                    if(utente.importoNonPagato < 0) {
+                        cout << "Non e' stato inserito un valore valido" << endl;
+                    }
+                }while(utente.TrimestreAttuale < 0);
 
             fTrimestre.seekp(posizione, ios::beg);
 
